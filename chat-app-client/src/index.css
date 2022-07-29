@@ -1,0 +1,269 @@
+/* Global Rules */
+
+*,
+*::before,
+*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+*::-webkit-scrollbar {
+    width: .5rem;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #CCC; 
+    border-radius: 10rem;
+    height: .3rem;
+}
+
+
+*::-webkit-scrollbar-track {
+    background: var(--color-grey); 
+    border-radius: 1rem
+}
+
+html{
+    font-size: 62.5%;
+
+    /* COLORS */
+    --color-primary-dark: #658FFF;
+    --color-primary-light: #83C5BE;
+    --color-secondary-dark: #CC562B;
+    --color-secondary-light: #E29578;
+
+    --color-grey-dark: #747474;
+    --color-grey: #e6e6e6;
+    --color-grey-light: #f4f7f5;
+
+    /* SHADOWS */
+    --shadow-large: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    --shadow-medium: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    --shadow-light: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    /* FONTS */
+    --font-primary: 'Nexa';
+    --font-secondary: 'Lato';
+
+}
+
+#root{
+    box-sizing: border-box;
+    height: 100vh;
+    display: grid;
+    background: linear-gradient(180deg, var(--color-primary-light) ,var(--color-secondary-light));
+    grid-template-columns: [full-start] 1fr [center-start aside-start] minmax(40rem, 50rem) 
+                           [aside-end main-start] minmax(45rem, 100rem) 
+                           [main-end center-end] 1fr [full-end];
+    font-family: var(--font-secondary);
+    padding: 3rem 0;
+    font-weight: 400;
+    color: var(--color-primary-dark);
+    line-height: 1.5;
+}
+
+
+
+#root > *{
+    background-color: #FFF;
+    overflow: hidden;
+}
+
+
+
+.main{
+    grid-column: main-start / main-end;
+    border-radius: 0 3rem 3rem 0;
+}
+
+/* Profile */
+
+
+/* Navigation */
+
+
+/* Search */
+
+
+
+
+
+
+/* Contacts */
+
+
+/* Main */
+/* Header */
+.main{
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chat Area */
+.chat__area{
+    flex: 1;
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.chat__area > *:not(:last-child){
+    margin-bottom: 2rem;
+}
+
+.msg{
+    max-width: 80%;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    border-radius: 1rem;
+    flex-direction: column;
+}
+
+
+.msg__date{
+    font-size: 1.2rem;
+}
+
+.msg--user{
+    align-self: end;
+    background-color: var(--color-primary-dark);
+}
+
+.msg--contact{
+    align-self: start;
+    background-color: var(--color-grey-light);
+}
+
+.msg__body{
+    word-break: break-all;
+}
+.msg--user > .msg__body{
+    color: #FFF;
+    font-size: 1.6em;
+}
+
+.msg--user > .msg__date{
+    color: #FFF;
+}
+
+.msg--contact > .msg__body{
+    color: var(--color-primary-dark);
+    font-size: 1.6em;
+}
+
+.chat__date{
+    align-self: center;
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+    background-color: var(--color-secondary-dark);
+    color: #FFF;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: var(--font-primary);
+}
+
+
+
+/* chat__sender */
+.chat__send{
+    height: 10rem;
+    border-top: 1px solid var(--color-grey);
+    box-shadow: var(--shadow-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2rem;
+}
+.chat__input{
+    flex: 1;
+    height: 6rem;
+    border-radius: 30rem;
+    padding: 1rem 2rem;
+    background-color: var(--color-grey-light);
+    border: none;
+    margin-right: 2rem;
+    font-size: 2rem;
+    color: var(--color-grey-dark);
+}
+
+.chat__input::placeholder{
+    font-size: 1.6rem;
+    color: var(--color-grey-dark);
+}
+
+.chat__input:focus{
+    border: 1px solid var(--color-grey);
+    outline: none;
+}
+
+.send__icon{
+    width: 2.5rem;
+    height: 2.5rem;
+    fill: #FFF;
+}
+
+.btn__send{
+    background-color: var(--color-primary-dark);
+    border-radius: 50%;
+    width: 6rem;
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    box-shadow: var(--shadow-light);
+    cursor: pointer;
+}
+
+
+
+/* Headings */
+.heading-1{
+    color: #000;
+    font-family: var(--font-primary);
+    font-size: 2rem;
+    text-transform: capitalize;
+    letter-spacing: .1rem;
+    word-spacing: .5rem;
+}
+
+.heading-2{
+    color: var(--color-primary-dark);
+    font-family: var(--font-primary);
+    font-size: 2rem;
+    text-transform: capitalize;
+    letter-spacing: .2rem;
+    word-spacing: .5rem;
+}
+
+.heading-3{
+    color: var(--color-primary-dark);
+    font-size: 1.6rem;
+    text-transform: capitalize;
+}
+
+/* Buttons */
+.btn{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+
+/* FONT FACES */
+/* Nexa */
+@font-face { font-family: Nexa; src: url('../public/fonts/Nexa/NexaRegular.otf')} 
+@font-face { font-family: Nexa; font-weight: bold; src: url('../public/fonts/Nexa/NexaBold.otf')}
+@font-face { font-family: Nexa; font-weight: light; src: url('../public/fonts/Nexa/NexaLight.otf')}
+
+/* Lato */
+@font-face { font-family: Lato; src: url('../public/fonts/Lato/Lato-Regular.ttf'); } 
+@font-face { font-family: Nexa; font-weight: bold; src: url('../public/fonts/Lato/Lato-Bold.ttf')}
+@font-face { font-family: Nexa; font-weight: light; src: url('../public/fonts/Lato/Lato-Light.ttf')}
+@font-face { font-family: Nexa; font-weight: lighter; src: url('../public/fonts/Lato/Lato-Thin.ttf')}
+@font-face { font-family: Nexa; font-style: italic; src: url('../public/fonts/Lato/Lato-Italic.ttf')}

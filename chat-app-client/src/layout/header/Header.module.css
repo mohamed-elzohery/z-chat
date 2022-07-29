@@ -1,0 +1,41 @@
+.chat{
+    display: flex;
+    height: 10rem;
+    border-bottom: 1px solid var(--color-grey);
+    box-shadow: var(--shadow-light);
+    padding: 0 4rem;
+}
+
+.chat__info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat__img{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    margin-right: 2rem;
+}
+
+.chat__online{
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--color-secondary-dark);
+    border-radius: 50%;
+    margin-left: 1rem;
+}
+
+.chat__controls{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mute__icon{
+    width: 3rem;
+    height: 3rem;
+    fill: var(--color-secondary-dark);
+}

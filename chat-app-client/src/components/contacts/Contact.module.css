@@ -1,0 +1,62 @@
+
+.contact__item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.contact__item:not(:last-child){
+    border-bottom: 1px solid var(--color-grey);
+}
+
+.contact__pic{
+    width: 7rem;
+    height: 7rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.contact__info{
+    margin-left: 1.6rem;
+}
+
+.contact__message{
+    font-size: 1.4rem;
+    color:  var(--color-grey-dark);
+    font-weight: 300;
+}
+
+.meassage__info{
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.message__time{
+    color: var(--color-grey-dark);
+    text-transform: capitalize;
+    font-size: 1.4rem;
+    font-weight: bold;
+
+}
+
+.message__count{
+    border-radius: 50%;
+    background-color: var(--color-primary-dark);
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: .5rem;
+    align-self: end;
+    margin-right: 1rem;
+}

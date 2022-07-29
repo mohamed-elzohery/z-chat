@@ -1,0 +1,20 @@
+.contacts__nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.contacts__nav .contacts__nav-btn{
+    padding: 2rem 5rem;
+    color: var(--color-secondary-light);
+    font-size: 2rem;
+    font-family: var(--font-primary);
+    font-weight: bold;
+}
+
+.contacts__nav-btn.active{
+    color: var(--color-secondary-dark);
+    border-bottom: 2px solid var(--color-secondary-dark);
+}
