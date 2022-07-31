@@ -1,0 +1,12 @@
+/* Chat Area */
+.chat__area{
+    flex: 1;
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.chat__area > *:not(:last-child){
+    margin-bottom: 2rem;
+}

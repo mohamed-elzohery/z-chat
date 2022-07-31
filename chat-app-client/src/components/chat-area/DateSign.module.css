@@ -1,0 +1,10 @@
+.chat__date{
+    align-self: center;
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+    background-color: var(--color-secondary-dark);
+    color: #FFF;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: var(--font-primary);
+}
