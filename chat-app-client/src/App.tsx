@@ -1,12 +1,8 @@
 import React from 'react';
-import Aside from './layout/aside/Aside';
-import Main from './layout/main/Main';
+import ChatApp from './pages/ChatApp';
 
 function App() {
-  return <>
-        <Aside />
-        <Main />
-      </>
+  return <ChatApp />
 }
 
 export default App;

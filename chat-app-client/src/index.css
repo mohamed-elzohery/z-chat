@@ -50,21 +50,23 @@ html{
 
 #root{
     box-sizing: border-box;
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    color: var(--color-primary-dark);
+    line-height: 1.5;
+}
+
+.chat-app{
+    padding: 3rem 0;
     height: 100vh;
     display: grid;
     background: linear-gradient(180deg, var(--color-primary-light) ,var(--color-secondary-light));
     grid-template-columns: [full-start] 1fr [center-start aside-start] minmax(40rem, 50rem) 
                            [aside-end main-start] minmax(45rem, 100rem) 
                            [main-end center-end] 1fr [full-end];
-    font-family: var(--font-secondary);
-    padding: 3rem 0;
-    font-weight: 400;
-    color: var(--color-primary-dark);
-    line-height: 1.5;
 }
 
-
-#root > *{
+.chat-app > *{
     overflow: hidden;
 }
 
