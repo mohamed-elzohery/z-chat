@@ -3,11 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ErrorResponse_1 = __importDefault(require("../utils/ErrorResponse"));
-const BadRequest_1 = __importDefault(require("../utils/BadRequest"));
-const NotFound_1 = __importDefault(require("../utils/NotFound"));
+const ErrorResponse_1 = __importDefault(require("../utils/errors/ErrorResponse"));
+const BadRequest_1 = __importDefault(require("../utils/errors/BadRequest"));
+const NotFound_1 = __importDefault(require("../utils/errors/NotFound"));
 const ErrorHandler = (err, req, res, next) => {
     // Check if error is explicitly thrown by the developer
+    console.log(err);
     if (err instanceof ErrorResponse_1.default) {
         res.status(err.statusCode).json(err.message);
         return;
@@ -21,7 +22,7 @@ const ErrorHandler = (err, req, res, next) => {
         error = new NotFound_1.default(`${err.params.id} is not found`);
     }
     if (err.name && err.name === 'ValidationError') {
-        error = new BadRequest_1.default(err.errors[Object.keys(err.errors)[0]].properties.message);
+        error = new BadRequest_1.default(err.errors[Object.keys(err.errors).at(-1)].properties.message);
     }
     if (err.code === 11000) {
         const fieldName = err.message.slice(err.message.indexOf("index:") + 7, err.message.indexOf("_1"));

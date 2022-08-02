@@ -1,0 +1,123 @@
+/* Login */
+.login{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.login__box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    padding: 1rem 3rem;
+    min-width: 40rem;
+}
+
+.login__title{
+    text-align: center;
+    margin: 3rem 0 2rem;
+}
+
+/* Logo */
+.logo{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.logo__img{
+    width: 10rem;
+    height: 10rem;
+}
+
+.loading{
+    transform-origin: center;
+    animation: loading 1.5s infinite both cubic-bezier(.71,.04,.23,.76);
+}
+
+.logo__txt{
+    font-size: 4rem;
+    color: var(--color-secondary-dark);
+    font-family: var(--font-secondary);
+    margin-left: -1rem;
+    text-transform: lowercase;
+}
+
+.login__gallery{
+    flex: 0 1 60%;
+
+}
+
+.login__img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.login__box{
+    flex: 1;
+}
+
+.have-account{
+    font-size: 1.6rem;
+}
+
+.have-account > a:hover{
+    color: var(--color-secondary-light);
+}
+
+/* Headings */
+.heading-1{
+    color: #000;
+    font-family: var(--font-primary);
+    font-size: 2rem;
+    text-transform: capitalize;
+    letter-spacing: .1rem;
+    word-spacing: .5rem;
+}
+
+.heading-2{
+    color: var(--color-primary-dark);
+    font-family: var(--font-primary);
+    font-size: 2rem;
+    text-transform: capitalize;
+    letter-spacing: .2rem;
+    word-spacing: .5rem;
+}
+
+.heading-3{
+    color: var(--color-primary-dark);
+    font-size: 1.6rem;
+    text-transform: capitalize;
+}
+
+/* Buttons */
+.btn{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+/* Animations */
+@keyframes loading {
+    0%{
+        transform: scale(1) rotate(0deg);
+    }
+
+    20%{
+        transform: scale(1.4) rotate(180deg);
+    }
+
+    90%{
+        transform: scale(1) rotate(360deg);
+    }
+
+    100%{
+        transform: scale(1) rotate(360deg);
+    }
+}

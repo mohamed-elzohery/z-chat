@@ -5,9 +5,11 @@ import dotenv from 'dotenv';
 import ErrorHandler from './middlewares/errorHandler';
 import path from 'path';
 import cookieParser from 'cookie-parser';
+import authGuard from './middlewares/authGuard';
 
 //Routes
 import AuthRouter from './routes/v1/AuthRouter';
+import UserRouter from './routes/v1/UserRoutes';
 
 
 const app = express();
@@ -19,8 +21,9 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-app.get('/', (req, res) => res.end("dsfsdfd"))
 app.use('/api/v1/auth', AuthRouter);
+app.use('/api/v1/user', authGuard, UserRouter);
+
 app.all('*', (req, res) => res.status(404).json({message: "Undefinded Routes"}));
 app.use(ErrorHandler);
 

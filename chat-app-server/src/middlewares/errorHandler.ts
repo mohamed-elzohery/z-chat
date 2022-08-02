@@ -7,7 +7,7 @@ import NotFound from '../utils/errors/NotFound';
 
 const ErrorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
     // Check if error is explicitly thrown by the developer
-    console.log(err);
+    console.log(err.errors);
     if(err instanceof ErrorResponse){
         res.status(err.statusCode).json(err.message);
         return;
@@ -25,6 +25,7 @@ const ErrorHandler = (err: any, req: Request, res: Response, next: NextFunction)
 
     if(err.name && err.name === 'ValidationError'){
         error = new BadRequest(err.errors[Object.keys(err.errors).at(-1)].properties.message); 
+        // error.name = 
     }
 
     if(err.code === 11000){
