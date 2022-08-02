@@ -11,7 +11,7 @@ const getCurrentUser = asyncHandler(async (req: Request, res: Response, next: Ne
         res.send({success: true, data: {currentUser: null}, message: 'user is not registered'});
         return;
     }
-    const decodedToken: JwtPayload = jwt.verify(token, process.env.JWT_KEY) as JwtPayload;
+    const decodedToken = jwt.verify(token, process.env.JWT_KEY) as JwtPayload;
 
     const user = await User.findById(decodedToken.id);
     if(!user){

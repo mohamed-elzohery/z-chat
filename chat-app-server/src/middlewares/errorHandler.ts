@@ -24,7 +24,7 @@ const ErrorHandler = (err: any, req: Request, res: Response, next: NextFunction)
     }
 
     if(err.name && err.name === 'ValidationError'){
-        error = new BadRequest(err.errors[Object.keys(err.errors)[0]].properties.message); 
+        error = new BadRequest(err.errors[Object.keys(err.errors).at(-1)].properties.message); 
     }
 
     if(err.code === 11000){

@@ -17,9 +17,10 @@ export interface UserI {
     photo?: string;
     isOnline: boolean;
     lastOnline: Date;
+    status: string;
+    friends: Schema.Types.ObjectId[];
     isPasswordMatched: (password: string) => Promise<boolean>;
     createToken: () => string; 
-
 }  
 
 const UserSchema = new Schema<UserI>({
@@ -29,7 +30,7 @@ const UserSchema = new Schema<UserI>({
         required: [true, 'name is required.'],
         maxlength: [30, 'name cannot be more than 30 characters'],
         minlength: [2, 'name cannot be less than two characters'],
-        match: [/^[A-Za-z][A-Za-z0-9_]$/, "Invalid Name"],
+        match: [/^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$/, "Invalid Name"],
         trim: true
     },
 
@@ -40,6 +41,13 @@ const UserSchema = new Schema<UserI>({
         required: [true, 'email is required'],
         unique: true,
         match: [/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/, "Invalid Email"],
+    },
+
+    password: {
+        type: String,
+        required: [true, 'password is required.'],
+        minlength: [8, "password cannot be less than 8 characters"],
+        match: [/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, "password must be at least one letter, one number and one special character"]
     },
 
     gender: {
@@ -66,6 +74,18 @@ const UserSchema = new Schema<UserI>({
 
     lastOnline: {
         type: Date,
+    },
+
+    status: {
+        type: String,
+        trim: true,
+        maxlength: [60, "status cannot be longer than 60 characters"],
+        default: "I am using Z chat",
+    },
+
+    friends: {
+        type: [Schema.Types.ObjectId],
+        ref: 'User'
     }
 
 });
