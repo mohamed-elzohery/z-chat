@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import { Error } from 'mongoose';
 import ErrorResponse from '../utils/errors/ErrorResponse';
 import BadRequest from '../utils/errors/BadRequest';
 import NotFound from '../utils/errors/NotFound';
@@ -7,7 +6,6 @@ import NotFound from '../utils/errors/NotFound';
 
 const ErrorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
     // Check if error is explicitly thrown by the developer
-    console.log(err.errors);
     if(err instanceof ErrorResponse){
         res.status(err.statusCode).json(err.message);
         return;
@@ -21,19 +19,21 @@ const ErrorHandler = (err: any, req: Request, res: Response, next: NextFunction)
 
     if(err.name && err.name === 'CastError' ){
         error = new NotFound(`${err.params.id} is not found`); 
+        error.name = 'id';
     }
 
     if(err.name && err.name === 'ValidationError'){
-        error = new BadRequest(err.errors[Object.keys(err.errors).at(-1)].properties.message); 
-        // error.name = 
+        const firstError = err.errors[Object.keys(err.errors).at(-1)].properties;
+        error = new BadRequest(firstError.message); 
+        error.name = firstError.path;
     }
 
     if(err.code === 11000){
         const fieldName = err.message.slice(err.message.indexOf("index:" ) + 7 , err.message.indexOf("_1"));
         error = new BadRequest(`${fieldName} is duplicated`);
+        error.name = fieldName;
     }
-
-    res.status(error.statusCode).json(error.message);
+    res.status(error.statusCode).json({[error.name]: error.message});
 }
 
 export default ErrorHandler;

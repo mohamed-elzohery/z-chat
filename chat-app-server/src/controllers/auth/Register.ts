@@ -7,7 +7,7 @@ const register = asyncHandler(async (req, res, next) => {
     res.cookie('token_uid', token, {
         httpOnly: true,
         expires: new Date(Date.now() + +process.env.JWT_AGE),
-        path: '/'
+        path: '/',
     });
     res.status(201).json({success: true, data: user, token, message: 'User created successfully.'});
 });

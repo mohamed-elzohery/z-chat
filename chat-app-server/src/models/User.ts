@@ -79,7 +79,7 @@ const UserSchema = new Schema<UserI>({
     status: {
         type: String,
         trim: true,
-        maxlength: [60, "status cannot be longer than 60 characters"],
+        maxlength: [100, "status cannot be longer than 100 characters"],
         default: "I am using Z chat",
     },
 

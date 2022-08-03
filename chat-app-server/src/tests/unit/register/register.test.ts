@@ -37,7 +37,7 @@ describe('Register User', () => {
                 password: "Elzohery@52"
               });
 
-        expect(response.body).toEqual("Invalid Email");
+        expect(response.body).toEqual({email: "Invalid Email"});
         expect(response.statusCode).toEqual(400);
     });
 
@@ -50,7 +50,7 @@ describe('Register User', () => {
                 phone: "01147905014",
               });
 
-        expect(response.body).toEqual("password is required.");
+        expect(response.body).toEqual({password: "password is required."});
         expect(response.statusCode).toEqual(400);
     })
 
@@ -76,7 +76,7 @@ describe('Register User', () => {
                 password: "Elzohery@52"
               });
 
-        expect(response.body).toEqual("email is duplicated");
+        expect(response.body).toEqual({email: "email is duplicated"});
         expect(response.statusCode).toEqual(400);
         });
 

@@ -21,30 +21,7 @@
     margin: 3rem 0 2rem;
 }
 
-/* Logo */
-.logo{
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-}
 
-.logo__img{
-    width: 10rem;
-    height: 10rem;
-}
-
-.loading{
-    transform-origin: center;
-    animation: loading 1.5s infinite both cubic-bezier(.71,.04,.23,.76);
-}
-
-.logo__txt{
-    font-size: 4rem;
-    color: var(--color-secondary-dark);
-    font-family: var(--font-secondary);
-    margin-left: -1rem;
-    text-transform: lowercase;
-}
 
 .login__gallery{
     flex: 0 1 60%;
@@ -103,21 +80,3 @@
     border-radius: 0;
 }
 
-/* Animations */
-@keyframes loading {
-    0%{
-        transform: scale(1) rotate(0deg);
-    }
-
-    20%{
-        transform: scale(1.4) rotate(180deg);
-    }
-
-    90%{
-        transform: scale(1) rotate(360deg);
-    }
-
-    100%{
-        transform: scale(1) rotate(360deg);
-    }
-}
