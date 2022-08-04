@@ -1,54 +1,24 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { BiCrop } from "react-icons/bi";
 import ReactCrop, {Crop} from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-import { useAppDispatch } from "../../hooks/app";
-import { UIActions } from "../../slices/UISlice";
 import Modal from "../../UI/modal";
 import classes from './ImageCropper.module.css';
+import { Buffer } from "buffer";
+
 
 export interface ImageCropperProps{
   srcImage: string;
   onReset: () => void,
-  onSumbit: () => void,
+  onSumbit: (image: File) => void,
 };
 
 
-const getCroppedImg = (image: HTMLImageElement, crop: Crop) => {
-  const canvas = document.createElement("canvas")!;
-  const scaleX = image.naturalWidth / image.width;
-  const scaleY = image.naturalHeight / image.height;
-  canvas.width = crop.width;
-  canvas.height = crop.height;
-  const ctx = canvas.getContext("2d");
-  
-  ctx?.drawImage(
-      image,
-      crop.x * scaleX,
-      crop.y * scaleY,
-      crop.width * scaleX,
-      crop.height * scaleY,
-      0,
-      0,
-      crop.width,
-      crop.height
-   )
-
-  const reader = new FileReader()
-  canvas.toBlob(blob => {
-      reader.readAsDataURL(blob)
-      reader.onloadend = () => {
-          this.dataURLtoFile(reader.result, 'cropped.jpg')
-      }
-  })
-}
-
-
 const ImageCropper: React.FC<ImageCropperProps> = ({srcImage, onReset, onSumbit}) => {
-
+  // const [croppedImageUrl, setCroppedImageUrl] = useState<string | null>(null);
+  const [croppedImage, setCroppedImage] = useState<File | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
 
-    const dispatch = useAppDispatch();
 
     const [crop, setCrop] = useState<Crop>({
         unit: 'px', // Can be 'px' or '%'
@@ -58,17 +28,64 @@ const ImageCropper: React.FC<ImageCropperProps> = ({srcImage, onReset, onSumbit}
         height: 300
       });
 
-    // const completeCropping = (crop: Crop) => {
-    //   if(imgRef) {
-        
-    //       const croppedImageUrl = getCroppedImg(imgRef, crop);
-    //       setState({ croppedImageUrl })
       
-    //   }
-    // }
+      const dataURLtoFile = (dataurl: string, filename: string) => {
+        let arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)![1],
+            bstr = Buffer.from(arr[1], 'base64').toString(), 
+            n = bstr.length, 
+            u8arr = new Uint8Array(n);
+                
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        let croppedImage = new File([u8arr], filename, {type:mime});
+        setCroppedImage(croppedImage); 
+      };
 
 
-      const closeCropper = () => dispatch(UIActions.closeCropper());
+const getCroppedImg = useCallback( (image: HTMLImageElement, crop: Crop) => {
+  const canvas = document.createElement("canvas")!;
+  const scaleX = image.naturalWidth / image.width;
+  const scaleY = image.naturalHeight / image.height;
+  canvas.width = crop.width;
+  canvas.height = crop.height;
+  const ctx = canvas.getContext("2d");
+  
+  ctx?.drawImage(
+    image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width,
+      crop.height
+   )
+   
+  const reader = new FileReader()
+  canvas.toBlob(blob => {
+    if(blob){
+      reader.readAsDataURL(blob)
+      reader.onloadend = () => {
+            dataURLtoFile(reader.result as string, 'cropped.jpg');
+        }
+    }
+  })
+}, []);
+
+  const completeCropping = () => {
+    getCroppedImg(imgRef.current!, crop);
+  }
+
+useEffect(() => {
+  if(imgRef.current){
+    getCroppedImg(imgRef.current, crop);
+  }
+}, [getCroppedImg, crop]);
+
+      const closeCropper = () => onReset();
       
       return <Modal closeModal={closeCropper}>
               <div className={classes.header}>
@@ -78,15 +95,20 @@ const ImageCropper: React.FC<ImageCropperProps> = ({srcImage, onReset, onSumbit}
               <ReactCrop
                 crop={crop}
                 onChange={c => setCrop(c)}
-                locked={true}
-                circularCrop={true}
-                // onComplete={completeCropping}
+                // circularCrop={true}
+                // ruleOfThirds={true}
+                onComplete={completeCropping}
+                minWidth={300}
+                minHeight={300}
+                maxHeight={600}
+                maxWidth={600}
+                aspect={1/1}
                 >
-                <img ref={imgRef} src={srcImage} alt="profile" className={classes.img}/>
+                <img ref={imgRef} src={srcImage} alt="profile" className={classes.img} onClick={e => e.preventDefault()}/>
               </ReactCrop>
               <div className={classes.form__controls}>
                     <button onClick={onReset} className={`btn ${classes['btn--cancel']}`}>Cancel</button>
-                    <button onClick={onSumbit} className={`btn ${classes['btn--save']}`}>Save</button>
+                    <button onClick={onSumbit.bind(this, croppedImage!)} className={`btn ${classes['btn--save']}`}>Save</button>
                 </div>
             </Modal>
 }

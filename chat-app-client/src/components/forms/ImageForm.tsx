@@ -10,7 +10,7 @@ import ImageCropper from '../image-cropper';
 
 const ImageForm = () => {
     const [img, setImg] = useState(ProfileImage);
-    const [croppedImage, setCroppedImage] = useState();
+    // const [croppedImage, setCroppedImage] = useState();
     const refForm = useRef<HTMLFormElement | null>(null);
     const isCropperOpen = useAppSelector(state => state.UI.isCropperOpen);
     const dispatch = useAppDispatch();
@@ -20,8 +20,8 @@ const ImageForm = () => {
         refForm.current?.reset();
     };
 
-    const onSumbit = () => {
-        console.log("image sumbitted");
+    const onSumbit = (image: File) => {
+        console.log(image);
     }
 
     const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,8 @@ const ImageForm = () => {
                         accept="image/*"
                         name="image"
                         id="file"
-                        onChange={onImageChange} />
+                        onChange={onImageChange}
+                        />
                 </div> 
                 {isCropperOpen && <ImageCropper 
                                      srcImage={img}
