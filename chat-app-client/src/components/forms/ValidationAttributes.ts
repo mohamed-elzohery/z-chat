@@ -9,7 +9,7 @@ export const name =  Yup.string()
         .matches(/^[a-zA-Z](?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$/, "Invalid name");
 
 export const status =  Yup.string()
-        .max(100, 'Name must be 30 characters or less')
+        .max(100, 'status must be 100 characters or less')
         .default("I am using Z chat");
 
 export const password = Yup.string()

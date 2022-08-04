@@ -30,7 +30,7 @@ const EditForm: React.FC<EditFormProps> = ({attribute, value, handleSumbit, vali
     };
       
 
-    return <form onSubmit={formik.handleSubmit}>
+    return <form onSubmit={formik.handleSubmit} className={classes.edit__form}>
             <div className={classes.edit__group}>
                 <label htmlFor={attribute} className={classes.edit__label}>{label}</label>
                 <div className={classes.inputGroup}>

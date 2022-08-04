@@ -86,6 +86,10 @@
     flex-direction: column;
 }
 
+.edit__form:not(:last-child){
+    margin-bottom: 4rem;
+}
+
 .edit__label{
     color: #000;
     font-size: 1.6rem;
