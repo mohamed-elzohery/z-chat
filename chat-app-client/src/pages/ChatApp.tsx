@@ -6,6 +6,7 @@ const ChatApp = () => {
     return  <div className='chat-app'>
               <Aside />
               <Main />  
+              {}
             </div>
             
 }

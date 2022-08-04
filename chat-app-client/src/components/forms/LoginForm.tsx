@@ -79,7 +79,7 @@ const LoginForm = () => {
                 {}
 
                 <div className={classes.form__controls}>
-                    <button type="submit"  className={`btn ${classes.sumbit__btn}`} disabled={isLoading}>Register</button>
+                    <button type="submit"  className={`btn ${classes.sumbit__btn}`} disabled={isLoading}>Login</button>
                 </div>
         </form>
 }

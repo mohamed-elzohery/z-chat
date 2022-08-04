@@ -5,54 +5,19 @@
     justify-content: center;
 }
 
-.img__Box{
-    position: relative;
-    width: 30rem;
-    height: 30rem;
-    border-radius: 50%;
-    object-fit: cover;
-    overflow: hidden;
-    margin: 5rem 0;
-    border: 1px solid var(--color-grey-dark);
-    box-shadow: var(--shadow-light);
-}
-
-.img__Box:hover .img__ovrlay{
-    opacity: 1;
-}
-
-.img{
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-}
-
-.img__ovrlay{
-    position: absolute;
-    transition: .3s all;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
+.header{
+    height: 10rem;
     display: flex;
-    flex-direction: column;
+    align-self: start;
+    padding: 2rem;
+}
+
+
+.forms__container{
+    padding: 2rem;
+    background-color: #FFF;
+    align-self: stretch;
+    display: flex;
     align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(10,10,10, .4);
-    pointer-events: none;
+    flex-direction: column;
 }
-
-.ovrlay__icon{
-    width: 10rem;
-    color: #FFF;
-    margin-bottom: 1rem;
-}
-
-.ovrlay__txt{
-    color: #FFF;
-    font-size: 2rem;
-}
-

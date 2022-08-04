@@ -1,0 +1,10 @@
+.btn{
+    margin-left: auto;
+    padding: 1rem;
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .3s all;
+    outline: none;
+    border: none;
+}

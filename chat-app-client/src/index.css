@@ -104,6 +104,10 @@ html{
     border-radius: 0;
 }
 
+.clickable{
+    cursor: pointer;
+}
+
 
 /* FONT FACES */
 /* Nexa */

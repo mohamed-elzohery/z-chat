@@ -1,0 +1,39 @@
+.img{
+    width: 50rem;
+}
+
+.form__controls{
+    height: 10rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 3rem;
+}
+
+.btn--cancel{
+    color: var(--color-primary-dark);
+    font-size: 1.6rem;
+    margin-right: 4rem;
+    font-weight: bold;
+}
+
+.btn--save{
+    background-color: var(--color-secondary-dark);
+    color:  #FFF;
+    font-weight: bold;
+    padding: 1rem 3rem;
+    font-size: 1.6rem;
+    box-shadow: var(--shadow-light);
+}
+
+.header{
+    padding: 2rem;
+    display: flex;
+}
+
+.header > p{
+    color: var(--color-secondary-dark);
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: var(--font-primary);
+}

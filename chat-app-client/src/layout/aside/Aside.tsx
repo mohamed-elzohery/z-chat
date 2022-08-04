@@ -4,9 +4,18 @@ import Profile from '../../components/profile/Profile';
 import Nav from '../../components/nav/Nav';
 import Search from '../../components/search/Search';
 import ContactList from '../../components/contacts/ContactList';
+import EditProfile from '../../pages/EditProfile';
+import { useAppSelector } from '../../hooks/app';
 
 const Aside = () => {
-    return <aside className={classes.aside}>
+    const isProfileEditorOpen = useAppSelector((state: any) => state.UI.isProfileEditorOpen);
+    console.log(isProfileEditorOpen);
+
+    if(isProfileEditorOpen) return  <aside className={classes.editor}>
+                                        <EditProfile name='Mohamed Elzohery' status='Im available now' />
+                                    </aside>;
+
+    return  <aside className={classes.contacts}>
                 <Profile />
                 <Nav />
                 <Search />

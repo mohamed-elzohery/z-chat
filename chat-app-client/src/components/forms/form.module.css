@@ -91,7 +91,7 @@
 }
 
 .edit__label{
-    color: #000;
+    color: var(--color-grey-dark);
     font-size: 1.6rem;
     margin-bottom: .5rem;
     font-weight: bold;
@@ -141,4 +141,68 @@
 
 .btn:hover{
     background-color: var(--color-grey);
+}
+
+/* Profile Image form */
+.img__Box{
+    position: relative;
+    width: 25rem;
+    height: 25rem;
+    border-radius: 50%;
+    object-fit: cover;
+    overflow: hidden;
+    margin: 3rem 0 6rem;
+    border: 1px solid var(--color-grey-dark);
+    box-shadow: var(--shadow-light);
+}
+
+.img__Box:hover .img__ovrlay{
+    opacity: 1;
+}
+
+.img{
+    width: 100%;
+    height: 100%;
+}
+
+.img__ovrlay{
+    position: absolute;
+    transition: .3s all;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(10,10,10, .4);
+    pointer-events: none;
+}
+
+.ovrlay__icon{
+    width: 10rem;
+    color: #FFF;
+    margin-bottom: 1rem;
+}
+
+.ovrlay__txt{
+    color: #FFF;
+    font-size: 2rem;
+}
+
+/* Image Input */
+.image__input{
+    display: flex;
+    position: absolute; 
+    width: 100%;
+    height: 100%;
+    top: 0; 
+    left: 0; 
+    opacity: 0;
+    cursor: pointer; 
+    border-radius: 50%;
 }

@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
-import ReactCrop, {Crop} from 'react-image-crop';
-import ImageCropper from '../components/image-cropper';
+import React from 'react';
 import classes from './editProfile.module.css';
 import * as Yup from 'yup';
-import {  AiFillCamera } from 'react-icons/ai'
-import ProfileImage from '../components/contacts/contact3.jpg';
 import EditForm from '../components/forms/EditForm';
 import { FormikValues } from 'formik';
 import { name as NameValidation, status as StatusValidation } from '../components/forms/ValidationAttributes';
-
+import {BiArrowBack} from 'react-icons/bi';
+import IconButton from '../UI/buttons/IconButton';
+import { useDispatch } from 'react-redux';
+import { UIActions } from '../slices/UISlice';
+import ImageForm from '../components/forms/ImageForm';
 export interface EditProfileProps{
     name: string;
     status: string; 
@@ -17,15 +17,7 @@ export interface EditProfileProps{
 
 
 const EditProfile: React.FC<EditProfileProps> = ({name = "mohamed elzohery", status, imgUrl}) => {
-    // const [username, setName] = useState(name);
-    // const [iserStatus, setStatus] = useState(status);
-
-    // const [isEditingName, setIsEditingName] = useState(false);
-    // const [IsEditingStatus, setIsEditingStatus] = useState(false);
-
-    // const handleClickName = (e: React.MouseEvent<HTMLButtonElement>) => setIsEditingName(prev => !prev);
-    
-
+    const dispatch = useDispatch();
 
     const sumbitName = (attr: FormikValues) => {
         console.log(attr);
@@ -35,15 +27,20 @@ const EditProfile: React.FC<EditProfileProps> = ({name = "mohamed elzohery", sta
         console.log(attr);
     }  
 
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        dispatch(UIActions.closeProfileEditor());
+    }
+
 
     return <div className={classes.container}>
-        <div className={classes.img__Box}>
-            <img src={ProfileImage} alt="profile" className={classes.img} />
-            <div className={classes.img__ovrlay}>
-                <AiFillCamera size={30} className={classes.ovrlay__icon} />
-                <p className={classes.ovrlay__txt}>Change Photo</p>
-            </div>
+        <div className={classes.header} >
+            <IconButton styles={classes} handleClick={handleClick}>
+                <BiArrowBack size={20} />    
+            </IconButton> 
         </div>
+        <h2 className='heading-2'>Profile</h2>
+        <ImageForm />
+        <div className={classes.forms__container}>
         <EditForm 
             value={name}
             label='your name'
@@ -59,6 +56,7 @@ const EditProfile: React.FC<EditProfileProps> = ({name = "mohamed elzohery", sta
             attribute='status'
             validationSchema={Yup.object({status: StatusValidation})}
             />
+        </div>
     </div>
 }
 

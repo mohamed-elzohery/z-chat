@@ -1,8 +1,17 @@
-.aside{
+.contacts{
     grid-column: aside-start / aside-end;
     border-radius: 3rem 0 0 3rem;
     background-color: var(--color-grey-light);
     padding: 2.5rem;
     display: flex;
     flex-direction: column;
+}
+
+.editor{
+    grid-column: aside-start / aside-end;
+    border-radius: 3rem 0 0 3rem;
+    background-color: var(--color-grey-light);
+    display: flex;
+    flex-direction: column;
+    
 }
