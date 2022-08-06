@@ -9,6 +9,7 @@ export enum Gender{
 }
 
 export interface UserI {
+    _id: string;
     name: string;
     email: string;
     gender: Gender;
@@ -104,7 +105,6 @@ UserSchema.methods.isPasswordMatched = async function (enteredPassword: string) 
   };
   
 UserSchema.methods.createToken = function () {
-    console.log(process.env.JWT_AGE)
     return jwt.sign({ id: this._id, email: this.email }, process.env.JWT_KEY, {
       expiresIn: +process.env.JWT_AGE / 1000,
     });

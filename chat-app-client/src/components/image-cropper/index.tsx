@@ -31,16 +31,16 @@ const ImageCropper: React.FC<ImageCropperProps> = ({srcImage, onReset, onSumbit}
       
       const dataURLtoFile = (dataurl: string, filename: string) => {
         let arr = dataurl.split(','),
-            mime = arr[0].match(/:(.*?);/)![1],
-            bstr = Buffer.from(arr[1], 'base64').toString(), 
-            n = bstr.length, 
-            u8arr = new Uint8Array(n);
-                
-        while(n--){
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-        let croppedImage = new File([u8arr], filename, {type:mime});
-        setCroppedImage(croppedImage); 
+        mime = arr[0].match(/:(.*?);/)![1],
+        bstr = atob(arr[1]), 
+        n = bstr.length, 
+        u8arr = new Uint8Array(n);
+            
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    let croppedImage = new File([u8arr], filename, {type:mime});
+    setCroppedImage(croppedImage);
       };
 
 
@@ -67,12 +67,13 @@ const getCroppedImg = useCallback( (image: HTMLImageElement, crop: Crop) => {
   const reader = new FileReader()
   canvas.toBlob(blob => {
     if(blob){
+      console.log(blob.type);
       reader.readAsDataURL(blob)
       reader.onloadend = () => {
             dataURLtoFile(reader.result as string, 'cropped.jpg');
         }
     }
-  })
+  }, "image/jpg", 1)
 }, []);
 
   const completeCropping = () => {

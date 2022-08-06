@@ -1,10 +1,10 @@
 import asyncHandler from "../../middlewares/asyncHandler";
 import User from "../../models/User";
-import { AuthenticatedRequest } from "src/middlewares/authGuard";
+import { AuthenticatedRequest } from "../../middlewares/authGuard";
 
 
 const updateUser = asyncHandler(async (req: AuthenticatedRequest, res, next) => {
-    const id = req.user.id;
+    const id = req.user._id;
     const updatedUser = await User.findByIdAndUpdate(id, req.body, {new: true, runValidators: true});
 
     res.json({

@@ -10,6 +10,7 @@ import authGuard from './middlewares/authGuard';
 //Routes
 import AuthRouter from './routes/v1/AuthRouter';
 import UserRouter from './routes/v1/UserRoutes';
+import UploadRouter from './routes/v1/UplaodRouter';
 
 
 const app = express();
@@ -18,11 +19,12 @@ process.env.NODE_ENV !== "production" && app.use(morgan('dev'));
 dotenv.config({path: path.resolve(__dirname + `/config/${process.env.NODE_ENV}.env`)});
 
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
-app.use(express.json());
 app.use(cookieParser());
+app.use(express.json());
 
 app.use('/api/v1/auth', AuthRouter);
 app.use('/api/v1/user', authGuard, UserRouter);
+app.use('/api/v1/upload', authGuard, UploadRouter);
 
 app.all('*', (req, res) => res.status(404).json({message: "Undefinded Routes"}));
 app.use(ErrorHandler);

@@ -7,6 +7,7 @@ import { UIActions } from '../../slices/UISlice';
 
 import classes from './form.module.css';
 import ImageCropper from '../image-cropper';
+import axios from 'axios';
 
 const ImageForm = () => {
     const [img, setImg] = useState(ProfileImage);
@@ -20,8 +21,13 @@ const ImageForm = () => {
         refForm.current?.reset();
     };
 
-    const onSumbit = (image: File) => {
+    const onSumbit = async (image: File) => {
         console.log(image);
+        axios.defaults.withCredentials = true;
+        const res = await axios.get('http://localhost:4000/api/v1/upload');
+        console.log(image.type);
+        axios.defaults.withCredentials = false;
+        await axios.put(res.data.url, image, {headers: {'Content-Type': image.type}});
     }
 
     const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

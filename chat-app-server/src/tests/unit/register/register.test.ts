@@ -11,7 +11,6 @@ describe('Register User', () => {
     beforeAll(async () => {
         mongoServer = await MongoMemoryServer.create();
         const mongoUri = mongoServer.getUri();
-        console.log(mongoUri);
         await mongoose.connect(mongoUri);
     });
       

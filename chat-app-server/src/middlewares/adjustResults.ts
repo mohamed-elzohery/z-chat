@@ -34,8 +34,6 @@ const adjustResults =  (model: Model<any>) => async (req: Request, res: Advanced
         }
      });
 
-     console.log(query);
- 
      //Save find query to a variable
      let findQuery = model.find(query);
  

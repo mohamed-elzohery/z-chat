@@ -23,7 +23,6 @@ describe('Register User', () => {
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         mongoServer = yield mongodb_memory_server_1.MongoMemoryServer.create();
         const mongoUri = mongoServer.getUri();
-        console.log(mongoUri);
         yield mongoose_1.default.connect(mongoUri);
     }));
     afterAll(() => __awaiter(void 0, void 0, void 0, function* () {

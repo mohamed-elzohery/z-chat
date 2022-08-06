@@ -92,7 +92,6 @@ UserSchema.methods.isPasswordMatched = function (enteredPassword) {
     });
 };
 UserSchema.methods.createToken = function () {
-    console.log(process.env.JWT_AGE);
     return jsonwebtoken_1.default.sign({ id: this._id, email: this.email }, process.env.JWT_KEY, {
         expiresIn: +process.env.JWT_AGE / 1000,
     });

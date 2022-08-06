@@ -8,12 +8,11 @@ import BadRequest from '../utils/errors/BadRequest';
 import { UserI } from '../models/User';
 
 export interface AuthenticatedRequest extends Request {
-    user: UserI;
+    user?: UserI;
 }
 
 const authGuard = asyncHandler(async (req: AuthenticatedRequest, res, next) => {
   let token = req.cookies['token_uid'] || req.body.token;
-  console.log(token);
   if (!token) return next(new Unauthorized('Unauthorized user access'));
 
   let decodedToken;
