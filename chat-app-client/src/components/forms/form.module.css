@@ -112,6 +112,8 @@
     padding: 0 1rem;
 }
 
+
+
 .edit__input:read-only{
     border: none;
 }
@@ -126,6 +128,10 @@
     border: none;
     outline: none;
     border-bottom: 1px solid var(--color-primary-dark);
+}
+
+.edit__input--err, .edit__input--err:focus{
+    border-bottom: 1px solid var(--color-secondary-dark);
 }
 
 
