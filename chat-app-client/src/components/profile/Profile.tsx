@@ -1,11 +1,12 @@
 import React from 'react';
-import profileImg from "./profile.jpg";
 import classes from './Profile.module.css';
 import { UIActions } from '../../slices/UISlice';
 import { useAppDispatch } from '../../hooks/app';
+import { useAppSelector } from '../../hooks/app';
 
 const Profile = () =>  {
     const dispatch = useAppDispatch();
+    const userData = useAppSelector(state => state.User);
 
     const handleClick = () => {
         dispatch(UIActions.openProfileEditor());
@@ -13,13 +14,13 @@ const Profile = () =>  {
 
   return (
     <section className={classes.profile}>
-            <img className={`${classes['profile__img']} clickable`} alt="profile" src={profileImg} onClick={handleClick} />
+            <img className={`${classes['profile__img']} clickable`} alt="profile" src={userData.photo} onClick={handleClick} />
             <div className={`${classes['profile__info']} clickable`} onClick={handleClick}>
                 <h2 className="heading-2">
-                    lena john
+                    {userData.name}
                 </h2>
                 <p className={classes['profile__status']}>
-                    nice day everyone
+                    {userData.status}
                 </p>
             </div>
         </section>

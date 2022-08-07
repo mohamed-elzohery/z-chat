@@ -13,14 +13,19 @@ export interface EditFormProps{
 }
 
 const EditForm: React.FC<EditFormProps> = ({attribute, value, handleSumbit, validationSchema, label}) => {
+    
     const [isEditing, setIsEditing] = useState(false);
     const input = useRef<HTMLInputElement>(null);
+
     const formik = useFormik({
         initialValues: {[attribute]: value},
         validationSchema,
         validateOnBlur: false,
         validateOnChange: true,
-        onSubmit: handleSumbit,
+        onSubmit: (values) => {
+            setIsEditing(false);
+            handleSumbit(values);
+        },
     });
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -47,7 +52,7 @@ const EditForm: React.FC<EditFormProps> = ({attribute, value, handleSumbit, vali
                     <button 
                         className={classes.btn}
                         onClick={handleClick}
-                        type="submit"
+                        type={isEditing ? "button" : "submit"}
                     >
                             {isEditing ? <AiOutlineCheck size={16}/> : <MdModeEditOutline size={16}/>}
                     </button>
@@ -55,7 +60,6 @@ const EditForm: React.FC<EditFormProps> = ({attribute, value, handleSumbit, vali
                     {formik.errors[attribute] && <p className={classes.error__txt}>
                     {formik.errors[attribute]}
                     </p>}
-                
             </div>
             </form>
 }

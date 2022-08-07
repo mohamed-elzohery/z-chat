@@ -5,6 +5,7 @@ import NotFound from '../utils/errors/NotFound';
 
 
 const ErrorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
+    console.log(err)
     // Check if error is explicitly thrown by the developer
     if(err instanceof ErrorResponse){
         res.status(err.statusCode).json(err.message);
@@ -12,9 +13,9 @@ const ErrorHandler = (err: any, req: Request, res: Response, next: NextFunction)
     }
 
     let error: ErrorResponse = {
-        statusCode: 500,
-        message: 'Server Error',
-        name: 'server'
+        statusCode: err.statusCode || 500,
+        message: err.message || 'Server Error',
+        name: err.name || 'server'
     };
 
     if(err.name && err.name === 'CastError' ){

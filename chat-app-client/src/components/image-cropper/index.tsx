@@ -3,18 +3,19 @@ import { BiCrop } from "react-icons/bi";
 import ReactCrop, {Crop} from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import Modal from "../../UI/modal";
+import Spinner from "../Spinner";
 import classes from './ImageCropper.module.css';
-import { Buffer } from "buffer";
 
 
 export interface ImageCropperProps{
   srcImage: string;
   onReset: () => void,
   onSumbit: (image: File) => void,
+  isLoading: boolean
 };
 
 
-const ImageCropper: React.FC<ImageCropperProps> = ({srcImage, onReset, onSumbit}) => {
+const ImageCropper: React.FC<ImageCropperProps> = ({srcImage, onReset, onSumbit, isLoading}) => {
   // const [croppedImageUrl, setCroppedImageUrl] = useState<string | null>(null);
   const [croppedImage, setCroppedImage] = useState<File | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -107,9 +108,11 @@ useEffect(() => {
                 >
                 <img ref={imgRef} src={srcImage} alt="profile" className={classes.img} onClick={e => e.preventDefault()}/>
               </ReactCrop>
-              <div className={classes.form__controls}>
-                    <button onClick={onReset} className={`btn ${classes['btn--cancel']}`}>Cancel</button>
-                    <button onClick={onSumbit.bind(this, croppedImage!)} className={`btn ${classes['btn--save']}`}>Save</button>
+                <div className={classes.form__controls}>
+                {isLoading ? <Spinner /> : <>
+                    <button disabled={isLoading} type="button" onClick={onReset} className={`btn ${classes['btn--cancel']}`}>Cancel</button>
+                    <button disabled={isLoading} type="button" onClick={onSumbit.bind(this, croppedImage!)} className={`btn ${classes['btn--save']}`}>Save</button>
+                </>}
                 </div>
             </Modal>
 }

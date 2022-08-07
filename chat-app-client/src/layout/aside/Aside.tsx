@@ -8,11 +8,11 @@ import EditProfile from '../../pages/EditProfile';
 import { useAppSelector } from '../../hooks/app';
 
 const Aside = () => {
-    const isProfileEditorOpen = useAppSelector((state: any) => state.UI.isProfileEditorOpen);
+    const isProfileEditorOpen = useAppSelector((state) => state.UI.isProfileEditorOpen);
     console.log(isProfileEditorOpen);
 
     if(isProfileEditorOpen) return  <aside className={classes.editor}>
-                                        <EditProfile name='Mohamed Elzohery' status='Im available now' />
+                                        <EditProfile />
                                     </aside>;
 
     return  <aside className={classes.contacts}>

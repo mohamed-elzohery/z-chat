@@ -9,6 +9,7 @@ import PrivateRoute from './components/PrivateRoute';
 import EditProfile from './pages/EditProfile';
 import { Provider } from 'react-redux';
 import store from './store';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,7 +23,7 @@ root.render(
           </Route>
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
-          <Route path='edit-profile' element={<EditProfile name="mohamed elzohery" status='hello I am available' />} />
+          <Route path='edit-profile' element={<EditProfile />} />
       </Routes>
     </BrowserRouter>
   </Provider>

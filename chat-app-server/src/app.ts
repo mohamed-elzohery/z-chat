@@ -9,7 +9,7 @@ import authGuard from './middlewares/authGuard';
 
 //Routes
 import AuthRouter from './routes/v1/AuthRouter';
-import UserRouter from './routes/v1/UserRoutes';
+import UserRouter from './routes/v1/UserRouter';
 import UploadRouter from './routes/v1/UplaodRouter';
 
 

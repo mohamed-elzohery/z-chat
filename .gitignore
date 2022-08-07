@@ -2,5 +2,6 @@
 !/.gitignore
 
 chat-app-client/node_modules
+chat-app-client/.env
 chat-app-server/src/config/*.env
 chat-app-server/node_modules
