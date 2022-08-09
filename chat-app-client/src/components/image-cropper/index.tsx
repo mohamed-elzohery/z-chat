@@ -109,7 +109,7 @@ useEffect(() => {
                 <img ref={imgRef} src={srcImage} alt="profile" className={classes.img} onClick={e => e.preventDefault()}/>
               </ReactCrop>
                 <div className={classes.form__controls}>
-                {isLoading ? <Spinner /> : <>
+                {isLoading ? <Spinner styles={{width: '2rem', height: '2rem', marginLeft: 'auto'}} /> : <>
                     <button disabled={isLoading} type="button" onClick={onReset} className={`btn ${classes['btn--cancel']}`}>Cancel</button>
                     <button disabled={isLoading} type="button" onClick={onSumbit.bind(this, croppedImage!)} className={`btn ${classes['btn--save']}`}>Save</button>
                 </>}

@@ -3,13 +3,13 @@ import classes from './Contact.module.css';
 
 export type ContactProps = {
     name: string,
-    unseenCount: number,
-    lastMessageDate: string,
+    unseenCount?: number,
+    lastMessageDate?: string,
     photo: string,
-    lastMessage: string
+    lastMessage?: string
 }
 
-const Contact:React.FC<ContactProps> = ({name, photo, unseenCount, lastMessageDate, lastMessage}) => {
+const Contact:React.FC<ContactProps> = ({name, photo, unseenCount = 2, lastMessageDate = 'yesterday', lastMessage='hello bro'}) => {
     return <li className={`${classes.contact__item} btn`}>
                 <img src={photo} alt="contact img" className={classes.contact__pic} />
                 <div className={classes.contact__info}>

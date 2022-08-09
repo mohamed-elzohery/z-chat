@@ -11,6 +11,7 @@ import authGuard from './middlewares/authGuard';
 import AuthRouter from './routes/v1/AuthRouter';
 import UserRouter from './routes/v1/UserRouter';
 import UploadRouter from './routes/v1/UplaodRouter';
+import ContactsRouter from './routes/v1/ContactsRouter';
 
 
 const app = express();
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use('/api/v1/auth', AuthRouter);
 app.use('/api/v1/user', authGuard, UserRouter);
 app.use('/api/v1/upload', authGuard, UploadRouter);
+app.use('/api/v1/contacts', authGuard, ContactsRouter);
 
 app.all('*', (req, res) => res.status(404).json({message: "Undefinded Routes"}));
 app.use(ErrorHandler);

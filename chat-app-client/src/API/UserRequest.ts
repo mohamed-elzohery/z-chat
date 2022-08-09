@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseURL = 'http://localhost:4000/api/v1/user/';
+const baseURL = 'http://localhost:4000/api/v1/user';
 const axiosGroup = axios.create({baseURL, withCredentials: true});
 
 export const updatePhoto = async (photoKey: string) => {
@@ -13,6 +13,10 @@ export const updateName = async (name: string) => {
 
 export const updateStatus = async (status: string) => {
     return axiosGroup.patch('/status', {status});
+}
+
+export const getAllUsers = async () => {
+    return axiosGroup.get('/');
 }
 
 

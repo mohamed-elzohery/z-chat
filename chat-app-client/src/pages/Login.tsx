@@ -13,7 +13,7 @@ const Register = () => {
             <h1 className={`heading-1 ${classes.login__title}`}>Login</h1>
             <LoginForm />
             <p className={classes['have-account']}>
-               Don't have an account? <Link to="/login">Register</Link>
+               Don't have an account? <Link to="/register">Register</Link>
             </p>
         </div>
     </div>

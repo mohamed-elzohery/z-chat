@@ -2,10 +2,7 @@
     border: .4rem solid #f3f3f3;
     border-top: .4rem solid var(--color-secondary-dark);
     border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
     animation: spin 1s linear infinite;
-    margin-left: auto;
   }
 
   @keyframes spin {

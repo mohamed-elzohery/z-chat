@@ -1,41 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './ContactList.module.css';
-import contactOneImage from './contact1.jpg';
-import contactTwoImage from './contact2.jpg';
-import contactThreeImage from './contact3.jpg';
-import { ContactProps } from './Contact';
+// import { ContactProps } from './Contact';
 
 import Contact from './Contact';
+import { useAppDispatch, useAppSelector } from '../../hooks/app';
+import { ContactsActions } from '../../slices/ContactsSlice';
+import Spinner from '../Spinner';
+import { getAllContacts } from '../../API/ContactsRequests';
 
-const fakeContactData: ContactProps[] = [
-    {
-        photo: contactOneImage,
-        name: 'john due',
-        unseenCount: 2,
-        lastMessageDate: 'yesterday',
-        lastMessage: 'I am about to come',
-    },
-    {
-        photo: contactTwoImage,
-        name: 'Caley Simpson',
-        unseenCount: 4,
-        lastMessageDate: '04:12',
-        lastMessage: 'I am watching a movie',
-    },
-    {
-        photo: contactThreeImage,
-        name: 'sara tomasiski',
-        unseenCount: 8,
-        lastMessageDate: '20:44',
-        lastMessage: 'not today',
-    },
-    
-];
 
 const ContactList = () => {
+    const dispatch = useAppDispatch();
+    const contacts = useAppSelector(state => state.Contacts.contacts);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        setIsLoading(true);
+        getAllContacts().then(res => {
+            console.log(res.data.contacts);
+            dispatch(ContactsActions.getContacstData({contacts: res.data.contacts}));
+        }).catch(console.log)
+        .finally(() => setIsLoading(false));
+
+    }, [dispatch]);
+
+    if(isLoading) return <Spinner styles={{width: '5rem', height: '5rem'}} />;
+    if(!isLoading && contacts.length === 0) return <p>No Users To Show</p>;
+    
     return <section className={classes.contacts}>
                 <ul className={classes.contacts__list}>
-                    {fakeContactData.map((contact, index) => <Contact {...contact} key={index}/>)}
+                    {contacts.map(({name, photo, _id}, index) => <Contact name={name} photo={process.env.REACT_APP_AWS_DOMAIN + photo} key={_id}/>)}
                 </ul>
             </section>
 }
