@@ -13,7 +13,9 @@ const getAllContactsData = asyncHandler(async (req: AuthenticatedRequest, res, n
                 foreignField: "receiver",
                 as: "recievedMessages",
                 pipeline: [
-                    {$match: {"sender": req.user._id}}
+                    {$match: {"sender": req.user._id}},
+                    {$sort: {"date": -1}},
+                    {$limit: 10}
                 ]
               },
         },
@@ -24,7 +26,9 @@ const getAllContactsData = asyncHandler(async (req: AuthenticatedRequest, res, n
                 foreignField: "sender",
                 as: "sentMessages",
                 pipeline: [
-                    {$match: {"receiver": req.user._id}}
+                    {$match: {"receiver": req.user._id}},
+                    {$sort: {"date": -1}},
+                    {$limit: 10}
                 ]
               },
         },

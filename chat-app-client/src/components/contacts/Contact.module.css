@@ -9,9 +9,11 @@
     transition: .2s all;
 }
 
-.contact__item:hover{
+.contact__item:hover,
+.active{
     background-color: var(--color-grey);
 }
+
 
 .contact__item:not(:last-child){
     border-bottom: 1px solid var(--color-grey);

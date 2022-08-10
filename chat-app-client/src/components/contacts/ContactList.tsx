@@ -33,6 +33,7 @@ const ContactList = () => {
                         name={name}
                         photo={process.env.REACT_APP_AWS_DOMAIN + photo} 
                         key={_id}
+                        _id={_id}
                         lastMessage={lastMessage}
                         countOfUnseenMessages={countOfUnseenMessages}
                         />)}

@@ -1,18 +1,15 @@
 import React from 'react';
 import classes from './Header.module.css';
+import { ActiveContactData } from '../../slices/ContactsSlice';
 
-export type ContactProps = { 
-    name: string,
-    isOnline: boolean,
-    contactImage: string,
-}
 
-const Header:React.FC<ContactProps> = ({name, isOnline, contactImage}) => {
+const Header:React.FC<ActiveContactData> = ({name, photo}) => {
+    
     return  <header className={`${classes.header} ${classes.chat}`}>
                 <div className={classes.chat__info}>
-                    <img src={contactImage} alt="active contact" className={classes.chat__img} />
+                    <img src={photo} alt="active contact" className={classes.chat__img} />
                     <h1 className="heading-1">{name}</h1>
-                    {isOnline && <span className={classes.chat__online}></span>}
+                    {/* {isOnline && <span className={classes.chat__online}></span>} */}
                 </div>
                 <div className={classes.chat__controls}>
                     <svg className={`${classes.mute__icon} btn`}>
