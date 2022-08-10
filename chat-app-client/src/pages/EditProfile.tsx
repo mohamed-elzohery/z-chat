@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/app';
 import { updateName, updateStatus } from '../API/UserRequest';
 import { UserActions } from '../slices/UserSlice';
 import {toast} from 'react-toastify';
-
+import {motion} from 'framer-motion';
 
 
 const EditProfile: React.FC = () => {
@@ -45,32 +45,38 @@ const EditProfile: React.FC = () => {
     }
 
 
-    return <div className={classes.container}>
-        <div className={classes.header} >
-            <IconButton styles={classes} handleClick={handleClick}>
-                <BiArrowBack size={20} />    
-            </IconButton> 
-        </div>
-        <h2 className='heading-2'>Profile</h2>
-        <ImageForm />
-        <div className={classes.forms__container}>
-        <EditForm 
-            value={userData.name}
-            label='your name'
-            handleSumbit={sumbitName}
-            attribute='name'
-            validationSchema={Yup.object({name: NameValidation})}
-            />
+    return  <div 
+            className={classes.container}>
+            <div className={classes.header} >
+                <IconButton styles={classes} handleClick={handleClick}>
+                    <BiArrowBack size={20} />    
+                </IconButton> 
+            </div>
+            <h2 className='heading-2'>Profile</h2>
+            <ImageForm />
+            <motion.div 
+                className={classes.forms__container}
+                initial={{y:-30, opacity: 0}}
+                animate={{y:0, opacity: 1}}
+                transition={{delay: .35, duration: .2}}
+            >
+            <EditForm 
+                value={userData.name}
+                label='your name'
+                handleSumbit={sumbitName}
+                attribute='name'
+                validationSchema={Yup.object({name: NameValidation})}
+                />
 
-        <EditForm 
-            value={userData.status}
-            label='status'
-            handleSumbit={sumbitStatus}
-            attribute='status'
-            validationSchema={Yup.object({status: StatusValidation})}
-            />
+            <EditForm 
+                value={userData.status}
+                label='status'
+                handleSumbit={sumbitStatus}
+                attribute='status'
+                validationSchema={Yup.object({status: StatusValidation})}
+                />
+            </motion.div>
         </div>
-    </div>
 }
 
 export default EditProfile;

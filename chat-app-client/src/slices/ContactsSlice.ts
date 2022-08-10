@@ -1,9 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+export type Message = {
+    body: string,
+    date: string,
+    isSeen: boolean,
+}
+
 
 export type UserData = {
+    _id?: string,
     name: string, 
     photo: string,
+    countOfUnseenMessages: number,
+    lastMessage:  Message
 }
 
 export type ContactsSliceType = {

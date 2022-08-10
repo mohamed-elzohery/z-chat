@@ -10,6 +10,7 @@ import axios from 'axios';
 import { updatePhoto } from '../../API/UserRequest';
 import { UserActions } from '../../slices/UserSlice';
 import {toast} from 'react-toastify';
+import {motion} from 'framer-motion';
 
 
 
@@ -52,7 +53,12 @@ const ImageForm: React.FC = () => {
         setImg(URL.createObjectURL(file));
     };
 
-    return  <form onSubmit={(e:React.FormEvent) => e.preventDefault()} ref={refForm}>
+    return  <motion.form 
+                transition={{delay: .15, duration: .25}}
+                initial={{scale: 0, opacity: .3}}
+                animate={{scale: 1, opacity: 1}}
+                onSubmit={(e:React.FormEvent) => e.preventDefault()} 
+                ref={refForm}>
                 <div className={classes.img__Box}>
                     <img src={photo} alt="profile" className={classes.img} />
                     <div className={classes.img__ovrlay}>
@@ -74,7 +80,7 @@ const ImageForm: React.FC = () => {
                                      onSumbit={onSumbit}
                                      isLoading={isLoading}
                                      />}
-            </form>
+            </motion.form>
 }
 
 export default ImageForm;

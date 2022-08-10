@@ -1,13 +1,8 @@
 .contacts{
-    margin-top: 5rem;
+    margin-top: 8rem;
     overflow-y: auto;
     flex: 1;
 }
-
-
-
-
-
 
 .contacts__list{
     list-style: none;

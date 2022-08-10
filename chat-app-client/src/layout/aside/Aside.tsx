@@ -6,21 +6,39 @@ import Search from '../../components/search/Search';
 import ContactList from '../../components/contacts/ContactList';
 import EditProfile from '../../pages/EditProfile';
 import { useAppSelector } from '../../hooks/app';
+import {AnimatePresence, motion} from 'framer-motion';
 
 const Aside = () => {
     const isProfileEditorOpen = useAppSelector((state) => state.UI.isProfileEditorOpen);
     console.log(isProfileEditorOpen);
 
-    if(isProfileEditorOpen) return  <aside className={classes.editor}>
-                                        <EditProfile />
-                                    </aside>;
-
-    return  <aside className={classes.contacts}>
+    return <aside className={isProfileEditorOpen ? classes.editor : classes.contacts} >
+        <AnimatePresence key="editor" exitBeforeEnter>
+            {isProfileEditorOpen ? 
+            <motion.div 
+            key="editor"  
+            initial={{x: '100%', opacity: 0}}
+            animate={{x: 0, opacity: 1}} 
+            exit={{x: '100%', opacity: 0}} 
+            transition={{delay: 0,type: 'tween', duration: .2}}
+            >
+            <EditProfile />
+            </motion.div> 
+            : 
+            <motion.div
+            initial={{x: '-100%', opacity: 0}} 
+            animate={{x: 0, opacity: 1}} 
+            exit={{x: '-100%', opacity: 0}}
+            transition={{delay: 0,type: 'tween', duration: .2}}
+            key="profile">
                 <Profile />
                 <Nav />
                 <Search />
                 <ContactList />
-            </aside>
+            </motion.div>
+            }
+            </AnimatePresence>
+        </aside>
 }
 
 export default Aside;

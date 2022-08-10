@@ -1,0 +1,25 @@
+[
+    {
+        "body": "hello my moahmed elzohery",
+        "sender": "62f24a85fecfef7265bfa238",
+        "receiver": "62f2497622bf20feb523c382",
+        "isSeen": true
+    },
+    {
+        "body": "hello my menshawy",
+        "sender": "62f2497622bf20feb523c382",
+        "receiver": "62f24a85fecfef7265bfa238",
+        "isSeen": true
+    },
+    {
+        "body": "okay elzohery",
+        "sender": "62f24a85fecfef7265bfa238",
+        "receiver": "62f2497622bf20feb523c382"
+    },
+    {
+        "body": "okay menshawy",
+        "sender": "62f2497622bf20feb523c382",
+        "receiver": "62f24a85fecfef7265bfa238"
+    }
+
+]

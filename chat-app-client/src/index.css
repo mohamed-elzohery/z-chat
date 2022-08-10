@@ -61,8 +61,8 @@ html{
     height: 100vh;
     display: grid;
     background: linear-gradient(180deg, var(--color-primary-light) ,var(--color-secondary-light));
-    grid-template-columns: [full-start] 1fr [center-start aside-start] minmax(40rem, 50rem) 
-                           [aside-end main-start] minmax(45rem, 100rem) 
+    grid-template-columns: [full-start] 1fr [center-start aside-start] minmax(40rem, 60rem) 
+                           [aside-end main-start] minmax(45rem, 110rem) 
                            [main-end center-end] 1fr [full-end];
 }
 
@@ -91,7 +91,7 @@ html{
 
 .heading-3{
     color: var(--color-primary-dark);
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     text-transform: capitalize;
 }
 

@@ -29,7 +29,13 @@ const ContactList = () => {
     
     return <section className={classes.contacts}>
                 <ul className={classes.contacts__list}>
-                    {contacts.map(({name, photo, _id}, index) => <Contact name={name} photo={process.env.REACT_APP_AWS_DOMAIN + photo} key={_id}/>)}
+                    {contacts.map(({name, photo, _id, countOfUnseenMessages, lastMessage}) => <Contact
+                        name={name}
+                        photo={process.env.REACT_APP_AWS_DOMAIN + photo} 
+                        key={_id}
+                        lastMessage={lastMessage}
+                        countOfUnseenMessages={countOfUnseenMessages}
+                        />)}
                 </ul>
             </section>
 }
