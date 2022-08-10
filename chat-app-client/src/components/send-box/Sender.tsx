@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
+import { useAppSelector } from '../../hooks/app';
 import classes from './Sender.module.css';
 
 const Sender = () => {
+    const {socket} = useAppSelector(state => state.User)!;
+    const activeContact = useAppSelector(state => state.Contacts.activeContact);
     const [message, setMessage] = useState('');
 
-    const handleSend = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMessage(e.target.value);
+    };
+
+    const handleSend = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        socket?.emit('send-to-server', {_id: activeContact?._id, body: message});
+        setMessage("");
     }
 
 
-    return  <form className={classes.chat__send}>
+    return  <form className={classes.chat__send} onSubmit={handleSend}>
                 <input 
                     type="text" 
                     className={classes.chat__input} 
@@ -17,7 +26,7 @@ const Sender = () => {
                     id="message" 
                     placeholder="Write Something"
                     value={message} 
-                    onChange={handleSend}
+                    onChange={handleChange}
                     />
                 <button type="submit" className={classes.btn__send}>
                     <svg className={classes.send__icon}>

@@ -4,7 +4,7 @@ const formatDate: (dateStr: string) => string = (dateStr) => {
     const date = new Date(dateStr);
     if(isToday(date)) return date.toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: '2-digit' });
     if(isInLastWeek(date) &&  new Date().getDate() - date.getDate() === 1) return "Yesterday";
-    if(isInLastWeek(date)) return date.toLocaleString('en-us', {weekday:'short'});
+    if(isInLastWeek(date)) return date.toLocaleString('en-us', {weekday:'long'});
     if(isInCurrentYear(date)) return `${('0' + (date.getMonth() + 1)).slice(-2)}/${('0' + date.getDate()).slice(-2)}`;
     return `${date.getFullYear()}/${('0' + (date.getMonth() + 1)).slice(-2)}`;
 }

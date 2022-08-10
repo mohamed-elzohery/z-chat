@@ -31,7 +31,7 @@ const initialState: ContactsSliceType= {
     activeContact: null
 }
 
-const getContacstData = (state: ContactsSliceType, action: PayloadAction<ContactsSliceType>) => {state.contacts = [...action.payload.contacts]};
+const getContacstData = (state: ContactsSliceType, action: PayloadAction<UserData[]>) => {state.contacts = [...action.payload]};
 
 const setActiveContact = (state: ContactsSliceType, action: PayloadAction<ActiveContactData>) => {
     state.activeContact = action.payload;

@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Aside from '../layout/aside/Aside';
 import Main from '../layout/main/Main';
 import {ToastContainer, Zoom} from 'react-toastify';
+import { useAppDispatch } from '../hooks/app';
+import { UserActions } from '../slices/UserSlice';
 
 const ChatApp = () => {
+    const dispatch = useAppDispatch();
+    
+    useEffect(() => {
+      dispatch(UserActions.connectToSocket({}));
+    },[dispatch])
+
     return  <div className='chat-app'>
               <Aside />
               <Main />  

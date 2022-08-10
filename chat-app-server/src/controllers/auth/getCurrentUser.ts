@@ -8,8 +8,6 @@ import User from '../../models/User';
 
 const getCurrentUser = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies['token_uid'] || req.body.token;
-    console.log(token)
-    console.log(req.cookies['token_uid'])
     if(!token){
         res.send({success: true, data: {currentUser: null}, message: 'user is not registered'});
         return;
