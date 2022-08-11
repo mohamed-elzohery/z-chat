@@ -11,7 +11,7 @@ const getAllContactsData = asyncHandler(async (req: AuthenticatedRequest, res, n
                 from: "messages",
                 localField: "_id",
                 foreignField: "receiver",
-                as: "recievedMessages",
+                as: "receivedMessages",
                 pipeline: [
                     {$match: {"sender": req.user._id}},
                     {$sort: {"date": -1}},
@@ -32,10 +32,10 @@ const getAllContactsData = asyncHandler(async (req: AuthenticatedRequest, res, n
         },
         {
             $project: {
-                countOfUnseenMessages: {$size: {$filter: {input: "$recievedMessages", as: "message" , cond: {$eq: ["$$message.isSeen", false]}}}},
+                countOfUnseenMessages: {$size: {$filter: {input: "$sentMessages", as: "message" , cond: {$eq: ["$$message.isSeen", false]}}}},
                 name: 1,
                 photo: 1,
-                messages: {$concatArrays: ["$recievedMessages", "$sentMessages"]}
+                messages: {$concatArrays: ["$receivedMessages", "$sentMessages"]}
             }
         },
         {
@@ -45,10 +45,10 @@ const getAllContactsData = asyncHandler(async (req: AuthenticatedRequest, res, n
             }
         },
         {
-            $limit: 20
+            $sort: {"messages.date": -1}
         },
         {
-            $sort: {"messages.date": 1}
+            $limit: 20
         },
         {
             $group:{
@@ -65,7 +65,7 @@ const getAllContactsData = asyncHandler(async (req: AuthenticatedRequest, res, n
                 countOfUnseenMessages: 1,
                 name: 1,
                 photo: 1,
-                lastMessage: {$last: "$messages"},
+                lastMessage: {$first: "$messages"},
             }
         },
         {

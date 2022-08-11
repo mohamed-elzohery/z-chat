@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useAppSelector } from '../../hooks/app';
 import classes from './Sender.module.css';
 
-const Sender = () => {
+export type SenderProps = {
+    message: string,
+    setMessage: (msg: string) => void,
+    sendMessageToChat: () => void
+}
+
+const Sender: React.FC<SenderProps> = ({message, setMessage, sendMessageToChat}) => {
+
     const {socket} = useAppSelector(state => state.User)!;
     const activeContact = useAppSelector(state => state.Contacts.activeContact);
-    const [message, setMessage] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMessage(e.target.value);
@@ -13,12 +19,13 @@ const Sender = () => {
 
     const handleSend = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        socket?.emit('send-to-server', {_id: activeContact?._id, body: message});
+        socket?.emit('send-to-server', {receiver: activeContact?._id, body: message});
+        sendMessageToChat();
         setMessage("");
     }
 
 
-    return  <form className={classes.chat__send} onSubmit={handleSend}>
+    return  <form  className={classes.chat__send} onSubmit={handleSend}>
                 <input 
                     type="text" 
                     className={classes.chat__input} 

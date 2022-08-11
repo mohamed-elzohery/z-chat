@@ -2,20 +2,28 @@ import React, { useEffect } from 'react';
 import Aside from '../layout/aside/Aside';
 import Main from '../layout/main/Main';
 import {ToastContainer, Zoom} from 'react-toastify';
-import { useAppDispatch } from '../hooks/app';
+import { useAppDispatch, useAppSelector } from '../hooks/app';
 import { UserActions } from '../slices/UserSlice';
 import {io} from 'socket.io-client';
+import { ContactsActions, Message } from '../slices/ContactsSlice';
 
 
 const ChatApp = () => {
     const dispatch = useAppDispatch();
+    const sender = useAppSelector(state => state.Contacts.activeContact?._id);
     
     useEffect(() => {
       const socket = io(process.env.REACT_APP_SOCKET_URL!, { transports : ['websocket', 'polling', 'flashsocket'] });
-      socket.on('send-to-contact', message => console.log(message));
+
+      socket.on('send-to-contact', (message: Message) => {
+          if(!sender || message.sender !== sender){
+            dispatch(ContactsActions.recieveMessageInactive({message}));
+          }
+      });
+
       dispatch(UserActions.connectToSocket(socket));
       return () => {socket.disconnect()}
-    },[dispatch])
+    },[dispatch, sender])
 
     return  <div className='chat-app'>
               <Aside />

@@ -10,7 +10,7 @@ const maxLettersNumber = 30;
 
 const Contact:React.FC<UserData> = ({name, photo, lastMessage = null, countOfUnseenMessages, _id}) => {
     const dispatch = useAppDispatch();
-    const activeContactId = useAppSelector(state => state.Contacts.activeContact?._id);
+    const activeContactId = useAppSelector(state => state.Contacts.activeContact?._id) as string;
     // const socket = useAppSelector(state => state.User.socket);
 
     const handleClick = (e: React.MouseEvent) => {

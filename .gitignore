@@ -3,6 +3,5 @@
 
 chat-app-client/node_modules
 chat-app-client/.env
-node_modules
 chat-app-server/src/config/*.env
 chat-app-server/node_modules

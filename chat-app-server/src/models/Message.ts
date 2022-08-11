@@ -31,7 +31,7 @@ const MessageSchema = new Schema<MessageI>({
     },
     date: {
         type: Date,
-        default: Date.now()
+        default: Date.now
     },
     isSeen: {
         type: Boolean,
