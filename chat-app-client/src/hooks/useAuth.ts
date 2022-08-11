@@ -15,7 +15,12 @@ const useAuth = () => {
             const user = res.data.data.currentUser as UserSliceType;
             if(user){
                 setIsLoggedIn(true);
-                dispatch(UserActions.getUserData({name: user.name, status: user.status, photo: process.env.REACT_APP_AWS_DOMAIN + user.photo}));
+                dispatch(UserActions.getUserData({
+                    name: user.name, 
+                    status: user.status, 
+                    photo: process.env.REACT_APP_AWS_DOMAIN + user.photo, 
+                    _id: user._id
+                }));
             };
         })
         .catch(err => console.log(err))

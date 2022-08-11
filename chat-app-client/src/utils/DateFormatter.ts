@@ -31,5 +31,8 @@ const getLastWeek = () => {
     return nextweek;
 }
 
+export const getTwelveHoursTime: (date: string) => string = (date) => {
+    return new Date(date).toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: '2-digit' });
+}
 
 export default formatDate;

@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {io, Socket} from 'socket.io-client';
+import { Socket} from 'socket.io-client';
 
 export type UserSliceType = {
+    _id: string,
     name: string,
     status: string;
     photo: string;
@@ -21,10 +22,8 @@ const updateUserName = (state: UserSliceType, action: PayloadAction<string>) => 
 const updateUserPhoto = (state: UserSliceType, action: PayloadAction<string>) => {state.photo = process.env.REACT_APP_AWS_DOMAIN + action.payload}; 
 const updateUserStatus = (state: UserSliceType, action: PayloadAction<string>) => {state.status = action.payload}; 
 
-const connectToSocket = (state: UserSliceType) => {
-    state.socket = io(process.env.REACT_APP_SOCKET_URL!, { transports : ['websocket', 'polling', 'flashsocket'] });
-    state.socket.on('send-to-contact', message => console.log(message));
-
+const connectToSocket = (state: UserSliceType,action: PayloadAction<Socket>) => {
+    state.socket = action.payload;
 }; 
 
 const UserSlice = createSlice({

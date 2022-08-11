@@ -4,6 +4,8 @@ import BadRequest from './utils/errors/BadRequest';
 import User, { UserI } from './models/User';
 import server from './server';
 import { IncomingMessage } from 'http';
+import getChatMessages from './controllers/messages/getChatMessages';
+import mongoose from 'mongoose';
 
 interface AuthenticatedMessage extends IncomingMessage{
     user: UserI
@@ -52,9 +54,10 @@ io.on("connection", async socket => {
     console.log(io.sockets.adapter.rooms);
     console.log(`${username} joined to room ${privateRoom}`);
 
-    socket.on('join-room', (roomId) => {
-        console.log(`${username} joined room ${roomId}`);
-        socket.join(roomId);
+    socket.on('load-messages', async (receiverId: string) => {
+        const messages = await getChatMessages(receiverId, privateRoom);
+        console.log(messages);
+        socket.emit('load-messages', messages);
     });
 
     socket.on('leave-room', (roomId) => {

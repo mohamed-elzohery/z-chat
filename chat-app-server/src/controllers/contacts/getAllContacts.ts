@@ -15,7 +15,6 @@ const getAllContactsData = asyncHandler(async (req: AuthenticatedRequest, res, n
                 pipeline: [
                     {$match: {"sender": req.user._id}},
                     {$sort: {"date": -1}},
-                    {$limit: 10}
                 ]
               },
         },
@@ -28,7 +27,6 @@ const getAllContactsData = asyncHandler(async (req: AuthenticatedRequest, res, n
                 pipeline: [
                     {$match: {"receiver": req.user._id}},
                     {$sort: {"date": -1}},
-                    {$limit: 10}
                 ]
               },
         },
@@ -45,6 +43,9 @@ const getAllContactsData = asyncHandler(async (req: AuthenticatedRequest, res, n
                 path: "$messages",
                 preserveNullAndEmptyArrays: true
             }
+        },
+        {
+            $limit: 20
         },
         {
             $sort: {"messages.date": 1}
