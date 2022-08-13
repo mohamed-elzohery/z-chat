@@ -34,6 +34,22 @@ const initialState: ContactsSliceType= {
     activeContact: null
 }
 
+const sortContactsByDate: (contacts: UserData[]) =>  UserData[] = (contacts) => {
+
+    if(contacts.length < 2) return contacts;  
+
+    return [...contacts].sort((a,b) => {
+        if(a.lastMessage && b.lastMessage){
+            return new Date(b.lastMessage.date).getTime() - new Date(a.lastMessage.date).getTime();
+        }else if(a.lastMessage){
+            return -1;
+        }else{
+            return 1;
+        }
+    });
+}
+
+
 const getContacstData = (state: ContactsSliceType, action: PayloadAction<UserData[]>) => {state.contacts = [...action.payload]};
 
 
@@ -46,13 +62,7 @@ const sendMessage = (state: ContactsSliceType, action: PayloadAction<Message>) =
         return contact;
     });
 
-    state.contacts = state.contacts.sort((a,b) => {
-        if(a.lastMessage && b.lastMessage){
-            return new Date(b.lastMessage.date).getTime() - new Date(a.lastMessage.date).getTime();
-        }else{
-            return 0;
-        }
-    });
+    state.contacts = sortContactsByDate(state.contacts);
 };
 
 const recieveMessageActive = (state: ContactsSliceType, action: PayloadAction<{message: Message}>) => {
@@ -64,13 +74,8 @@ const recieveMessageActive = (state: ContactsSliceType, action: PayloadAction<{m
         return contact;
     });
 
-    state.contacts = state.contacts.sort((a,b) => {
-        if(a.lastMessage && b.lastMessage){
-            return new Date(b.lastMessage.date).getTime() - new Date(a.lastMessage.date).getTime();
-        }else{
-            return 0;
-        }
-    });
+    state.contacts = sortContactsByDate(state.contacts);
+
 };
 
 const recieveMessageInactive = (state: ContactsSliceType, action: PayloadAction<{message: Message}>) => {
@@ -82,13 +87,8 @@ const recieveMessageInactive = (state: ContactsSliceType, action: PayloadAction<
         return contact;
     });
 
-    state.contacts = state.contacts.sort((a,b) => {
-        if(a.lastMessage && b.lastMessage){
-            return new Date(b.lastMessage.date).getTime() - new Date(a.lastMessage.date).getTime();
-        }else{
-            return 0;
-        }
-    });
+        state.contacts = sortContactsByDate(state.contacts);
+
 };
 
 

@@ -9,6 +9,12 @@ const formatDate: (dateStr: string) => string = (dateStr) => {
     return `${date.getFullYear()}/${('0' + (date.getMonth() + 1)).slice(-2)}`;
 }
 
+export const formatDay: (dateStr: string) => string = (dateStr) => {
+    const date = new Date(dateStr);
+    if(isToday(date)) return "Today";
+    return formatDate(dateStr);
+}
+
 const isToday = (date: Date) => {
     const today = new Date()
     return date.getDate() ===  today.getDate() &&

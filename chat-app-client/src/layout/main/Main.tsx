@@ -36,6 +36,7 @@ const Main = () => {
             socket.on('send-to-contact', (message: Message) => {
                 if(activeContact && message.sender === activeContact._id){
                   dispatch(ContactsActions.recieveMessageActive({message}));
+                  socket.emit('read-all', activeContact._id);
                   setMessages([...messages, message]);
                 }
             });

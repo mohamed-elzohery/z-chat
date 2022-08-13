@@ -67,6 +67,10 @@ io.on("connection", async socket => {
         io.to(messageSent.receiver).emit('send-to-contact', message);
     });
 
+    socket.on('read-all', async (receiverId: string) => {
+        await markAllAsSeen(receiverId, sender);
+    })
+
 });
 
 

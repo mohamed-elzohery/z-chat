@@ -3,6 +3,7 @@ import classes from './ContactList.module.css';
 // import { ContactProps } from './Contact';
 
 import Contact from './Contact';
+import {motion} from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '../../hooks/app';
 import { ContactsActions } from '../../slices/ContactsSlice';
 import Spinner from '../Spinner';
@@ -29,14 +30,24 @@ const ContactList = () => {
     
     return <section className={classes.contacts}>
                 <ul className={classes.contacts__list}>
-                    {contacts.map(({name, photo, _id, countOfUnseenMessages, lastMessage}) => <Contact
+                    {contacts.map(({name, photo, _id, countOfUnseenMessages, lastMessage}) => 
+                    <motion.div
+                    key={_id}
+                    layout
+                    transition={{
+                        type: 'spring',
+                        duration: .5
+                    }}
+                    >
+                        {<Contact
                         name={name}
                         photo={process.env.REACT_APP_AWS_DOMAIN + photo} 
                         key={_id}
                         _id={_id}
                         lastMessage={lastMessage}
                         countOfUnseenMessages={countOfUnseenMessages}
-                        />)}
+                        />}
+                    </motion.div>)}
                 </ul>
             </section>
 }
