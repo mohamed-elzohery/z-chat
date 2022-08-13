@@ -46,7 +46,6 @@ const Main = () => {
 
     const sendMessageToChat = () => {
         const now = new Date().toISOString();
-        console.log(now);
         const msgToSend: Message = {
             sender: sender,
             receiver: activeContact?._id!,

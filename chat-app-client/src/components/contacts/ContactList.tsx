@@ -18,7 +18,6 @@ const ContactList = () => {
     useEffect(() => {
         setIsLoading(true);
         getAllContacts().then(res => {
-            console.log(res.data.contacts);
             dispatch(ContactsActions.getContacstData(res.data.contacts));
         }).catch(console.log)
         .finally(() => setIsLoading(false));

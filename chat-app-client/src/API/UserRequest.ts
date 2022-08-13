@@ -3,7 +3,6 @@ const baseURL = 'http://localhost:4000/api/v1/user';
 const axiosGroup = axios.create({baseURL, withCredentials: true});
 
 export const updatePhoto = async (photoKey: string) => {
-    console.log(photoKey);
     return axiosGroup.patch('/photo', {photoKey});
 }
 

@@ -7,7 +7,6 @@ import { useAppSelector } from '../../hooks/app';
 const Profile = () =>  {
     const dispatch = useAppDispatch();
     const userData = useAppSelector(state => state.User);
-    console.log(userData)
     const handleClick = () => {
         dispatch(UIActions.openProfileEditor());
     }

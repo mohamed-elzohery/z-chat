@@ -5,7 +5,8 @@ import {UserMessage, ForeignerMessage} from './CustomMessage';
 import { useAppSelector } from '../../hooks/app';
 import { Socket } from 'socket.io-client';
 import {  Message } from '../../slices/ContactsSlice';
-import { getTwelveHoursTime } from '../../utils/DateFormatter';
+import { formatDay, getTwelveHoursTime, isSameDay } from '../../utils/DateFormatter';
+import {v1 as generateRandomKey} from 'uuid';
 
 export type MessageData = {
     body: string,
@@ -14,7 +15,6 @@ export type MessageData = {
 }
 
 const scrollToTheEnd = <T extends HTMLElement>(element: T) => {
-    console.log(element);
     element.scrollTop = element.scrollHeight;
 };
 
@@ -52,14 +52,23 @@ const ChatArea: React.FC<ChatAreaProps> = ({message, messages,setMessages}) => {
     const messagesArray = messages.map((message, index) => {
         const msgDate = getTwelveHoursTime(message.date);
         if(message.sender === sender){
-            return <UserMessage body={message.body} date={msgDate} key={message._id || index}/>
+            return <UserMessage body={message.body} date={msgDate} key={generateRandomKey()}/>
         }else{
-        return <ForeignerMessage body={message.body} date={msgDate} key={index}/>
+        return <ForeignerMessage body={message.body} date={msgDate} key={generateRandomKey()}/>
+        }
+    });
+
+    let chatElementsArray: JSX.Element[] = [];
+    messagesArray.forEach((message, index) => {
+        if( index === 0 ) chatElementsArray[0] = <DateSign day={formatDay(messages[index].date)} key={generateRandomKey()} />;
+        chatElementsArray = [...chatElementsArray, message];
+        if(!messages[index + 1]) return ;
+        if(!isSameDay(new Date(messages[index].date), new Date(messages[index + 1].date))){
+            chatElementsArray = [...chatElementsArray,  <DateSign day={formatDay(messages[index + 1].date)} key={generateRandomKey()} />];
         }
     });
         return  <div className={classes.chat__area} ref={area}>
-                    <DateSign day="today" />
-                    {messagesArray}
+                    {chatElementsArray}
                 </ div>
             
 }

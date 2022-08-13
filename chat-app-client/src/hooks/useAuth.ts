@@ -23,7 +23,7 @@ const useAuth = () => {
                 }));
             };
         })
-        .catch(err => console.log(err))
+        .catch(console.log)
         .finally(() => setIsChecking(false))
     }, [dispatch]);
 

@@ -10,7 +10,6 @@ import {AnimatePresence, motion} from 'framer-motion';
 
 const Aside = () => {
     const isProfileEditorOpen = useAppSelector((state) => state.UI.isProfileEditorOpen);
-    console.log(isProfileEditorOpen);
 
     return <aside className={isProfileEditorOpen ? classes.editor : classes.contacts} >
         <AnimatePresence key="editor" exitBeforeEnter>

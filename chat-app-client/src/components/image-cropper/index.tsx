@@ -68,7 +68,6 @@ const getCroppedImg = useCallback( (image: HTMLImageElement, crop: Crop) => {
   const reader = new FileReader()
   canvas.toBlob(blob => {
     if(blob){
-      console.log(blob.type);
       reader.readAsDataURL(blob)
       reader.onloadend = () => {
             dataURLtoFile(reader.result as string, 'cropped.jpg');

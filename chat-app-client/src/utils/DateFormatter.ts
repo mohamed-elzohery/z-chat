@@ -31,6 +31,19 @@ const isInCurrentYear: (date: Date) => boolean = (date: Date) => {
     return date.getFullYear() === new Date().getFullYear();
 }
 
+export const isSameDay: (date1: Date, date2: Date) => boolean = (date1, date2) => {
+    if (
+        date1.getFullYear() === date2.getFullYear() &&
+        date1.getMonth() === date2.getMonth() &&
+        date1.getDate() === date2.getDate()
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+}
+
+
 const getLastWeek = () => {
     var today = new Date();
     var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()-6);
@@ -40,5 +53,6 @@ const getLastWeek = () => {
 export const getTwelveHoursTime: (date: string) => string = (date) => {
     return new Date(date).toLocaleString('en-US', { hour: 'numeric', hour12: true, minute: '2-digit' });
 }
+
 
 export default formatDate;
