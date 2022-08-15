@@ -1,16 +1,33 @@
 .msg{
+    position: relative;
     max-width: 80%;
     padding: 1rem 2rem;
     display: flex;
     justify-content: center;
     border-radius: 1rem;
     flex-direction: column;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .msg--user{
     align-self: end;
     background-color: var(--color-primary-dark);
+    /* margin-right: 3rem; */
 }
+
+/* .msg  .msg__info{
+    display: none;
+}
+
+.msg--user  .msg__info{
+    position: absolute;
+    right: -5rem;
+    top: 70%;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+}
+ */
 
 .msg__date{
     font-size: 1.2rem;
@@ -18,6 +35,9 @@
 
 .msg__body{
     word-break: break-all;
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-family: var(--font-primary);
 }
 
 .msg--user{
@@ -30,12 +50,11 @@
     background-color: var(--color-grey-light);
 }
 
-.msg--user > .msg__body{
+.msg--user  .msg__body{
     color: #FFF;
-    font-size: 1.6em;
 }
 
-.msg--user > .msg__date{
+.msg--user  .msg__date{
     color: #FFF;
 }
 

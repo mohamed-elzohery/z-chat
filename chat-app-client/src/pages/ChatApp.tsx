@@ -14,6 +14,7 @@ const ChatApp = () => {
     
     useEffect(() => {
       const socket = io(process.env.REACT_APP_SOCKET_URL!, { transports : ['websocket', 'polling', 'flashsocket'] });
+      console.log(socket.connected);
 
       socket.on('send-to-contact', (message: Message) => {
           if(!sender || message.sender !== sender){
@@ -21,9 +22,13 @@ const ChatApp = () => {
           }
       });
 
+      socket.on("connect_error", (err) => {
+        console.log(`connect_error due to ${err.message}`);
+      });
+
       dispatch(UserActions.connectToSocket(socket));
       return () => {socket.disconnect()}
-    },[dispatch, sender])
+    },[dispatch])
 
     return  <div className='chat-app'>
               <Aside />

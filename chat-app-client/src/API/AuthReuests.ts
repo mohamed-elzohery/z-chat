@@ -16,3 +16,7 @@ export const getCurrentUser = async () => {
 export const loginUser = async ({email, password}: {email: string, password: string}) => {
     return axiosGroup.post('/login', {email, password});
 }
+
+export const logoutUser = async () => {
+    return axiosGroup.post('/logout');
+}

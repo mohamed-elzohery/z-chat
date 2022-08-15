@@ -22,7 +22,13 @@ const io = new Server(server, {
 
 // Auth middleware
 io.use(async (socket, next) => {
-    const token = socket.request.headers.cookie.split('=')[1];
+    let token;
+    const tokens = socket.request.headers.cookie.split('=');
+    tokens.forEach((element, index) => {
+        if(element === 'token_uid'){
+            token = tokens[index + 1];
+        }
+    });
     if(!token){
         next(new BadRequest('invalid token'));
         return;

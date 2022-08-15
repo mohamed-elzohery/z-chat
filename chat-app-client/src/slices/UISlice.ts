@@ -23,7 +23,8 @@ const UISlice = createSlice({
         openProfileEditor,
         closeProfileEditor,
         openCropper,
-        closeCropper
+        closeCropper,
+        reset: () => initialState,
     }
 });
 

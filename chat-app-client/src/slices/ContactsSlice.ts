@@ -7,6 +7,8 @@ export type Message = {
     isSeen: boolean,
     sender: string,
     receiver: string,
+    isDelivered: boolean,
+    isSent: boolean
 }
 
 export type ActiveContactData = {
@@ -41,6 +43,8 @@ const sortContactsByDate: (contacts: UserData[]) =>  UserData[] = (contacts) => 
     return [...contacts].sort((a,b) => {
         if(a.lastMessage && b.lastMessage){
             return new Date(b.lastMessage.date).getTime() - new Date(a.lastMessage.date).getTime();
+        }else if(!a.lastMessage && !b.lastMessage){
+            return 0;
         }else if(a.lastMessage){
             return -1;
         }else{
@@ -113,7 +117,8 @@ const ContactsSlice = createSlice({
         setActiveContact,
         sendMessage,
         recieveMessageActive,
-        recieveMessageInactive
+        recieveMessageInactive,
+        reset: () => initialState,
     }
 });
 

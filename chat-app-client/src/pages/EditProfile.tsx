@@ -13,11 +13,28 @@ import { updateName, updateStatus } from '../API/UserRequest';
 import { UserActions } from '../slices/UserSlice';
 import {toast} from 'react-toastify';
 import {motion} from 'framer-motion';
+import { logoutUser } from '../API/AuthReuests';
+import { useNavigate } from 'react-router-dom';
+import { ContactsActions } from '../slices/ContactsSlice';
 
 
 const EditProfile: React.FC = () => {
     const dispatch = useAppDispatch();
     const userData = useAppSelector(state => state.User);
+    const socket = useAppSelector(state => state.User.socket);
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        try{
+            await logoutUser();
+            dispatch(UIActions.reset());
+            dispatch(ContactsActions.reset());
+            socket?.disconnect();
+            navigate('/login');
+        }catch(err){
+            toast.error("failed logging out");
+        }
+    }
 
 
     const sumbitName = async (attr: FormikValues) => {
@@ -34,9 +51,9 @@ const EditProfile: React.FC = () => {
         try{
             await updateStatus(attr.status);
             dispatch(UserActions.updateUserStatus(attr.status));
-            toast.success("Name is updated successfully");
+            toast.success("Status is updated successfully");
         }catch(err){
-            toast.error("Name is updated successfully");
+            toast.error("Status is updated successfully");
         }
     }  
 
@@ -75,6 +92,15 @@ const EditProfile: React.FC = () => {
                 attribute='status'
                 validationSchema={Yup.object({status: StatusValidation})}
                 />
+            </motion.div>
+            <motion.div 
+            initial={{y:-30, opacity: 0}}
+            animate={{y:0, opacity: 1}}
+            transition={{delay: .45, duration: .2}}
+            >
+            <button className={`btn ${classes.logout}`} onClick={handleLogout}>
+                Logout
+            </button>
             </motion.div>
         </div>
 }

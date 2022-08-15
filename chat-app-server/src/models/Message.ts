@@ -1,6 +1,4 @@
 import { Schema, model } from "mongoose";
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
 
 export interface MessageI {
@@ -9,7 +7,7 @@ export interface MessageI {
     receiver: Schema.Types.ObjectId;
     date: Date;
     isSeen: boolean;
-    // isDelivered: boolean;
+    isDelivered: boolean;
 }  
 
 const MessageSchema = new Schema<MessageI>({
@@ -37,13 +35,10 @@ const MessageSchema = new Schema<MessageI>({
         type: Boolean,
         default: false
     },
-    // isDelivered: {
-    //     type: Boolean,
-    //     default: false,
-    //     validate(value: boolean){
-    //         if(this.isSeen && !value) throw new Error('Message cannot be undelivered while it is already seen');
-    //     }
-    // }
+    isDelivered: {
+        type: Boolean,
+        default: false,
+    }
 
 });
 

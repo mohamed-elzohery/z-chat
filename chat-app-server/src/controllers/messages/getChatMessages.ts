@@ -7,7 +7,10 @@ export const getChatMessages = async (receiver: string, sender: string) => {
 };
 
 export const markAllAsSeen = async (receiver: string, sender: string) => {
-    console.log(receiver + " " + sender);
     return Message.updateMany({$and: [{sender: receiver}, {receiver: sender}, {isSeen: false}]}, {isSeen: true}, {new: true})
+};
+
+export const markAllAsDelivered = async ( sender: string) => {
+    return Message.updateMany({$and: [{receiver: sender}, {isDelivered: false}]}, {isDelivered: true}, {new: true})
 };
 

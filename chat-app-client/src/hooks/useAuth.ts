@@ -21,7 +21,7 @@ const useAuth = () => {
                     photo: process.env.REACT_APP_AWS_DOMAIN + user.photo, 
                     _id: user._id
                 }));
-            };
+            }
         })
         .catch(console.log)
         .finally(() => setIsChecking(false))
